@@ -28,8 +28,8 @@ Jeder Ordner hat eine eigene `README.md` mit den Schritten zum Ausprobieren.
 ## Nutzung
 
 ```bash
-git clone https://github.com/marcwoge/project-harbor.git
-cd project-harbor/code/project-harbor/02-web-db
+git clone https://github.com/marcwoge/Vom-ersten-Container-zur-hochverfuegbaren-Plattform.git
+cd Vom-ersten-Container-zur-hochverfuegbaren-Plattform/code/project-harbor/02-web-db
 cp .env.example .env      # Werte durch eigene, starke ersetzen
 docker compose up -d
 ```
