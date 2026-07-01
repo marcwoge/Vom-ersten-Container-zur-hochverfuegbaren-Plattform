@@ -1,0 +1,5 @@
+# Niemals echte Secrets committen -- nur die .env.example-Vorlagen gehoeren ins Repo
+.env
+*/.env
+**/.env
+backups/

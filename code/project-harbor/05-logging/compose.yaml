@@ -1,0 +1,31 @@
+# Zentrales Logging mit Loki + Grafana.
+# Image-Versionen bewusst gepinnt (NICHT :latest); vor Einsatz aktuelle
+# stabile Version einsetzen -- siehe docs/release-checkliste.md.
+# Voraussetzung: Loki-Docker-Plugin installiert (Version ebenfalls pruefen):
+#   docker plugin install grafana/loki-docker-driver:3.1.0 --alias loki --grant-all-permissions
+services:
+  loki:
+    image: grafana/loki:3.1.0
+    restart: unless-stopped
+    command: -config.file=/etc/loki/local-config.yaml
+    networks: [logging]
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+    ports: ["3001:3000"]
+    networks: [logging]
+
+  demo-app:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+    networks: [logging]
+
+networks:
+  logging:

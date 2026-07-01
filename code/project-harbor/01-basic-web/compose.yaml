@@ -1,0 +1,12 @@
+services:
+  web:
+    build: ./app
+    image: harbor-web:0.1
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3

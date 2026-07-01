@@ -1,0 +1,16 @@
+# Dynamische Traefik-Konfiguration (File-Provider).
+# Beispiel: sichere TLS-Optionen und ein Security-Header-Middleware.
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+
+http:
+  middlewares:
+    secure-headers:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "strict-origin-when-cross-origin"
